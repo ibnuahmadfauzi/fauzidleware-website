@@ -22,3 +22,11 @@ body {
 .active {
   color: #fa8072 !important;
 }
+.bg-primary {
+  background-color: #fa8072 !important;
+}
+.square-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

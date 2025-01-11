@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-light py-3 mb-5">
+    <nav className="navbar navbar-expand-lg bg-light py-3 mb-4">
       <div className="container">
         <a className="navbar-brand fw-bold" href="#">
           <img src="/images/logo_fauzidleware.png" />
@@ -22,13 +22,18 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item me-4">
-              <a className="nav-link active" href="/">
+              <a className="nav-link" href="/">
                 Beranda
               </a>
             </li>
             <li className="nav-item me-4">
               <a className="nav-link" href="/artikel">
                 Artikel
+              </a>
+            </li>
+            <li className="nav-item me-4">
+              <a className="nav-link" href="#">
+                Tutorial
               </a>
             </li>
             <li className="nav-item me-4">
