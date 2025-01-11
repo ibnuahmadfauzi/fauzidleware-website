@@ -1,28 +1,57 @@
+import { useState } from "react";
+import article_data from "../utils/article_data";
+
 const Artikel = () => {
-  const articles = Array(5).fill(0);
+  const articlesPerPage = 5; // Jumlah artikel per halaman
+  const [currentPage, setCurrentPage] = useState(1); // Halaman aktif
+  const sortedArticles = [...article_data].sort((a, b) => b.id - a.id); // Mengurutkan artikel dari id terbesar
+
+  // Fungsi untuk mendapatkan artikel pada halaman aktif
+  const getCurrentArticles = () => {
+    const startIndex = (currentPage - 1) * articlesPerPage;
+    const endIndex = startIndex + articlesPerPage;
+    return sortedArticles.slice(startIndex, endIndex);
+  };
+
+  // Fungsi untuk mendapatkan jumlah total halaman
+  const totalPages = Math.ceil(sortedArticles.length / articlesPerPage);
+
+  // Fungsi untuk menampilkan excerpt artikel
+  function getExcerpt(htmlContent, wordLimit) {
+    const plainText = htmlContent.replace(/<[^>]+>/g, "");
+    const words = plainText.split(/\s+/);
+    const excerpt = words.slice(0, wordLimit).join(" ");
+    return words.length > wordLimit ? `${excerpt}...` : excerpt;
+  }
 
   return (
     <div>
-      {articles.map((_, index) => (
-        <div className="box-article mb-3" key={index}>
-          <div className="card border-0">
+      {getCurrentArticles().length > 0 ? (
+        getCurrentArticles().map((value, index) => (
+          <div key={index} className="card border-0 bg-light mb-3">
             <div className="card-body">
-              <div className="d-flex align-items-center">
-                <img
-                  src="https://i.fbcd.co/products/resized/resized-750-500/563d0201e4359c2e890569e254ea14790eb370b71d08b6de5052511cc0352313.jpg"
-                  className="square-image"
-                  style={{ width: "30%", marginRight: "10px" }}
-                />
-                <div>
-                  <h5 style={{ textAlign: "justify" }}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry
-                  </h5>
+              <div className="row align-items-center">
+                <div className="col-lg-4">
+                  <img
+                    src={"/images/articles/" + value.thumbnail}
+                    className="img-fluid square-image rounded-2"
+                    alt={value.title}
+                  />
+                </div>
+                <div className="col-lg-8">
+                  <div className="mb-2">
+                    {value.categories.map((category, idx) => (
+                      <small
+                        className="bg-secondary text-light me-2 rounded-1 px-2"
+                        key={idx}
+                      >
+                        {category}
+                      </small>
+                    ))}
+                  </div>
+                  <h5 style={{ textAlign: "left" }}>{value.title}</h5>
                   <small className="d-block" style={{ textAlign: "justify" }}>
-                    It is a long established fact that a reader will be
-                    distracted by the readable content of a page when looking at
-                    its layout. The point of using Lorem Ipsum is that it has a
-                    more-or-less normal distribution of letters...
+                    {getExcerpt(value.body, 20)}
                   </small>
                   <div className="mt-2">
                     <a href="#" className="text-decoration-none">
@@ -33,8 +62,64 @@ const Artikel = () => {
               </div>
             </div>
           </div>
+        ))
+      ) : (
+        <div className="text-center">
+          <h5 className="mt-5">Tidak ada artikel yang ditemukan</h5>
+          <p>Cobalah mencari artikel lain dengan kata kunci yang berbeda.</p>
         </div>
-      ))}
+      )}
+
+      {/* Komponen Navigasi Pagination */}
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-center mt-4">
+          <nav>
+            <ul className="pagination">
+              <li
+                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                >
+                  Previous
+                </button>
+              </li>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <li
+                  key={i}
+                  className={`page-item ${
+                    currentPage === i + 1 ? "active" : ""
+                  }`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => setCurrentPage(i + 1)}
+                  >
+                    {i + 1}
+                  </button>
+                </li>
+              ))}
+              <li
+                className={`page-item ${
+                  currentPage === totalPages ? "disabled" : ""
+                }`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      )}
     </div>
   );
 };

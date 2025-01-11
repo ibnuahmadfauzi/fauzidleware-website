@@ -5,10 +5,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import article_data from "../utils/article_data";
 
 const Aside = () => {
-  const popular_article = Array(5).fill(0);
-
   return (
     <>
       <div className="card border-0 mb-3">
@@ -56,23 +55,24 @@ const Aside = () => {
         <div className="card-body">
           <h6>Artikel Terbaru</h6>
           <ul class="list-group">
-            {popular_article.map((_, index) => (
-              <li class="list-group-item" key={index}>
-                <a href="#" className="text-decoration-none">
-                  <div className="d-flex align-items-center">
-                    <img
-                      src="https://i.fbcd.co/products/resized/resized-750-500/563d0201e4359c2e890569e254ea14790eb370b71d08b6de5052511cc0352313.jpg"
-                      className="square-image"
-                      style={{ width: "20%", marginRight: "10px" }}
-                    />
-                    <span>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </span>
-                  </div>
-                </a>
-              </li>
-            ))}
+            {[...article_data]
+              .sort((a, b) => b.id - a.id) // Urutkan artikel berdasarkan ID dari terbesar ke terkecil
+              .slice(0, 5) // Ambil 5 artikel pertama
+              .map((value, index) => (
+                <li className="list-group-item" key={index}>
+                  <a href="#" className="text-decoration-none">
+                    <div className="d-flex align-items-center">
+                      <img
+                        src={"/images/articles/" + value.thumbnail}
+                        className="square-image"
+                        style={{ width: "20%", marginRight: "10px" }}
+                        alt={value.title}
+                      />
+                      <span>{value.title}</span>
+                    </div>
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
       </div>

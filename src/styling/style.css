@@ -26,7 +26,12 @@ body {
   background-color: #fa8072 !important;
 }
 .square-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  margin-right: 20px;
+}
+.square-image img {
+  width: 100%; /* Ubah sesuai ukuran yang diinginkan */
+  height: 160px; /* Sama dengan lebar untuk memastikan persegi */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  display: block; /* Opsional, menghapus jarak bawaan jika gambar adalah inline */
+  border-radius: 0; /* Opsional, memastikan sudut tidak melengkung */
 }
