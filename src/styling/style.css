@@ -6,8 +6,17 @@ body {
 }
 
 /* reset bootrstrap style */
+a {
+  color: #fa8072 !important;
+}
+.btn {
+  color: #ffffff !important;
+}
 .navbar-brand img {
   height: 40px;
+}
+.navbar ul li a {
+  color: #373737 !important;
 }
 .bg-light {
   background-color: #ffffff !important;

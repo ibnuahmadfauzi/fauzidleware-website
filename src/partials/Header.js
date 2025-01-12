@@ -1,5 +1,6 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 const Header = () => {
   return (
@@ -21,50 +22,41 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={1}>
               <a className="nav-link" href="/">
                 Beranda
               </a>
             </li>
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={2}>
               <a className="nav-link" href="/artikel">
                 Artikel
               </a>
             </li>
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={3}>
               <a className="nav-link" href="#">
-                Tutorial
+                Produk
               </a>
             </li>
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={4}>
               <a className="nav-link" href="#">
                 Portofolio
               </a>
             </li>
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={5}>
               <a className="nav-link" href="#">
                 Mading
               </a>
             </li>
-            <li className="nav-item me-4">
+            <li className="nav-item me-4" key={6}>
               <a className="nav-link" href="/kontak">
                 Kontak
               </a>
             </li>
           </ul>
           <div>
-            <form>
-              <div className="d-flex">
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  placeholder="apa yang kamu cari ?"
-                />
-                <button type="submit" className="btn btn-sm btn-primary ms-2">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </div>
-            </form>
+            <a href="#" className="btn btn-sm btn-primary">
+              Layanan Kami
+            </a>
           </div>
         </div>
       </div>

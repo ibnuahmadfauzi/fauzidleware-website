@@ -1,23 +1,37 @@
 import { useState } from "react";
 import article_data from "../utils/article_data";
 import Aside from "../partials/Aside";
+import { useParams } from "react-router-dom";
 
 const Artikel = () => {
-  const articlesPerPage = 5; // Jumlah artikel per halaman
-  const [currentPage, setCurrentPage] = useState(1); // Halaman aktif
-  const sortedArticles = [...article_data].sort((a, b) => b.id - a.id); // Mengurutkan artikel dari id terbesar
+  const { keyword } = useParams();
+  console.log(keyword);
+  const articlesPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  let sortedArticles;
 
-  // Fungsi untuk mendapatkan artikel pada halaman aktif
+  if (keyword === undefined) {
+    sortedArticles = [...article_data].sort((a, b) => b.id - a.id);
+  } else {
+    const searchArticle = (keyword) => {
+      return article_data.filter(
+        (item) =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.body.toLowerCase().includes(keyword.toLowerCase())
+      );
+    };
+    const result = [...searchArticle(keyword)].sort((a, b) => b.id - a.id);
+    sortedArticles = result;
+  }
+
   const getCurrentArticles = () => {
     const startIndex = (currentPage - 1) * articlesPerPage;
     const endIndex = startIndex + articlesPerPage;
     return sortedArticles.slice(startIndex, endIndex);
   };
 
-  // Fungsi untuk mendapatkan jumlah total halaman
   const totalPages = Math.ceil(sortedArticles.length / articlesPerPage);
 
-  // Fungsi untuk menampilkan excerpt artikel
   function getExcerpt(htmlContent, wordLimit) {
     const plainText = htmlContent.replace(/<[^>]+>/g, "");
     const words = plainText.split(/\s+/);
@@ -56,7 +70,10 @@ const Artikel = () => {
                       {getExcerpt(value.body, 20)}
                     </small>
                     <div className="mt-2">
-                      <a href="#" className="text-decoration-none">
+                      <a
+                        href={"/artikel/" + value.slug}
+                        className="text-decoration-none"
+                      >
                         Selengkapnya ...
                       </a>
                     </div>
@@ -72,7 +89,6 @@ const Artikel = () => {
           </div>
         )}
 
-        {/* Komponen Navigasi Pagination */}
         {totalPages > 1 && (
           <div className="d-flex justify-content-center mt-4">
             <nav>

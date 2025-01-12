@@ -12,18 +12,18 @@ const Footer = () => {
               justifyContent: "center",
             }}
           >
-            <li className="mx-2">
-              <a href="#" className="text-decoration-none">
+            <li className="mx-2" key={1}>
+              <a href="/" className="text-decoration-none">
                 Home
               </a>
             </li>
-            <li className="mx-2">
-              <a href="#" className="text-decoration-none">
+            <li className="mx-2" key={2}>
+              <a href="/tentang" className="text-decoration-none">
                 Tentang
               </a>
             </li>
-            <li className="mx-2">
-              <a href="#" className="text-decoration-none">
+            <li className="mx-2" key={3}>
+              <a href="/kontak" className="text-decoration-none">
                 Kontak
               </a>
             </li>
