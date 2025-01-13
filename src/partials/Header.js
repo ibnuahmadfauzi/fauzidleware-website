@@ -33,11 +33,6 @@ const Header = () => {
                 Produk
               </a>
             </li>
-            <li className="nav-item me-4" key={4}>
-              <a className="nav-link" href="#">
-                Portofolio
-              </a>
-            </li>
             <li className="nav-item me-4" key={5}>
               <a className="nav-link" href="#">
                 Mading

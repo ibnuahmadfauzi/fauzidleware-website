@@ -44,3 +44,15 @@ a {
   display: block; /* Opsional, menghapus jarak bawaan jika gambar adalah inline */
   border-radius: 0; /* Opsional, memastikan sudut tidak melengkung */
 }
+
+/* style for hero section */
+.hero-section h1 {
+  font-size: 70px;
+}
+.hero-section .hero-description,
+.hero-section .hero-image {
+  padding: 50px 20px;
+}
+.hero-section .hero-description span {
+  color: #fa8072;
+}

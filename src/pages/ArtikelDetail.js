@@ -23,7 +23,7 @@ const ArtikelDetail = () => {
           <div className="card-body">
             <div className="mb-3">
               <a href="/" className="text-decoration-none">
-                Home
+                Beranda
               </a>{" "}
               &gt;{" "}
               <a href="/artikel" className="text-decoration-none">
