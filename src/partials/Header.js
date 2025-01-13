@@ -1,7 +1,3 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light py-3 mb-4">
@@ -47,15 +43,15 @@ const Header = () => {
                 Mading
               </a>
             </li>
-            <li className="nav-item me-4" key={6}>
+            <li className="nav-item me-4" key={5}>
               <a className="nav-link" href="/kontak">
                 Kontak
               </a>
             </li>
           </ul>
           <div>
-            <a href="#" className="btn btn-sm btn-primary">
-              Layanan Kami
+            <a href="/tentang" className="btn btn-sm btn-primary">
+              Tentang Kami
             </a>
           </div>
         </div>
